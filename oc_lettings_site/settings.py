@@ -19,6 +19,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'profiles.apps.ProfilesConfig',
     'lettings.apps.LettingsConfig',
     'oc_lettings_site.apps.OCLettingsSiteConfig',
     'django.contrib.admin',
