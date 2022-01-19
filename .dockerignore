@@ -1,0 +1,17 @@
+# IDE config files
+.idea/
+
+# git files
+.git/
+.gitignore
+
+# markdowns
+*.md
+
+# virtual environments
+venv
+
+# caches
+.*cache*
+*__pycache__*
+*.pyc
