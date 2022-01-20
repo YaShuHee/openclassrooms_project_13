@@ -16,4 +16,4 @@ RUN python manage.py collectstatic --noinput
 EXPOSE 8000
 
 # run the application using gunicorn server, when a container is runned
-CMD gunicorn --pythonpath oc_lettings_site oc_lettings_site.wsgi --bind 0.0.0.0:8000
+CMD gunicorn --pythonpath oc_lettings_site oc_lettings_site.wsgi
