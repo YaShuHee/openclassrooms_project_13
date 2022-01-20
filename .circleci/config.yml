@@ -46,8 +46,8 @@ jobs:
           image: timgelibert/oc-lettings-13
       - heroku/install
       - run:
-          name: Reset heroku git:remote
-          command: git remote rm heroku && heroku git:remote -a oc-lettings-13
+          name: Set heroku git:remote
+          command: heroku git:remote -a oc-lettings-13
       - heroku/push-docker-image:
           process-types: web
       - run:
