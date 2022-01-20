@@ -4,32 +4,24 @@ version: 2.1
 orbs:
   python: circleci/python@1.5
   docker: circleci/docker@2.0.1
+  heroku: circleci/heroku@1.2.6
 
 
 workflows:
   version: 2
-  test-build-publish-deploy:
+  check-build-and-push-app:
     jobs:
-      - test-code
-      - docker/publish:
-          image: timgelibert/oc-lettings
-          docker-username: DOCKER_USERNAME
-          docker-password: DOCKER_TOKEN
+      - build-and-test-python
+      - build-push-docker-and-deploy-to-heroku:
           requires:
-            - test-code
-          filters:
-            branches:
-              only: master
-      - push-docker-image-to-heroku:
-          requires:
-            - docker/publish
+            - build-and-test-python
           filters:
             branches:
               only: master
 
 
 jobs:
-  test-code:
+  build-and-test-python:
     docker:
       - image: cimg/python:3.9.2
     steps:
@@ -42,9 +34,16 @@ jobs:
       - run:
           name: Flake8
           command: flake8
-  push-docker-image-to-heroku:
-    machine: true
+  build-push-docker-and-deploy-to-heroku:
+    executor: docker/docker
     steps:
-      - run:
-          name: Pass heroku step
-          command: echo "Not pushing docker image to Heroku from CI/CD yet."
+      - setup_remote_docker
+      - checkout
+      - docker/check
+      - docker/build:
+          image: timgelibert/oc-lettings
+      - docker/push:
+          image: timgelibert/oc-lettings
+      - heroku/install
+      - heroku/push-docker-image:
+          process-types: web
