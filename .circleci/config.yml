@@ -53,3 +53,12 @@ jobs:
       - run:
           name: Release
           command: heroku container:release web --app oc-lettings-13
+      - run:
+          name: Define SECRET_KEY
+          command: heroku config:set SECRET_KEY=$SECRET_KEY
+      - run:
+          name: Define SENTRY_CREDENTIALS
+          command: heroku config:set SENTRY_CREDENTIALS=$SENTRY_CREDENTIALS
+      - run:
+          name: Define DEBUG key
+          command: heroku config:set DEBUG=$DEBUG
