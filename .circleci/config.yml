@@ -45,8 +45,11 @@ jobs:
       - docker/push:
           image: timgelibert/oc-lettings-13
       - heroku/install
+      - run:
+          name: Reset heroku git:remote
+          command: git remote rm heroku && heroku git:remote -a oc-lettings-13
       - heroku/push-docker-image:
           process-types: web
       - run:
           name: Release
-          command: heroku container:release
+          command: heroku container:release web --app oc-lettings-13
