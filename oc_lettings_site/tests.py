@@ -11,9 +11,9 @@ class OcLettingsSiteTest(TestCase):
         assert b"<title>Holiday Homes</title>" in response.content
 
         assert b"<h1>Welcome to Holiday Homes</h1>" in response.content
-        #
-        # profile_a_tag = f"<a href=\"{reverse('profiles:index')}\">Profiles</a>"
-        # assert profile_a_tag.encode("UTF-8") in response.content
-        #
-        # letting_a_tag = f"<a href=\"{reverse('lettings:index')}\">Lettings</a>"
-        # assert letting_a_tag.encode("UTF-8") in response.content
+
+        profile_a_tag = f"<a href=\"{reverse('profiles:index')}\">Profiles</a>"
+        assert profile_a_tag.encode("UTF-8") in response.content
+
+        letting_a_tag = f"<a href=\"{reverse('lettings:index')}\">Lettings</a>"
+        assert letting_a_tag.encode("UTF-8") in response.content
