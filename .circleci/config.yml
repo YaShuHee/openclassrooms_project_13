@@ -46,6 +46,12 @@ jobs:
           image: timgelibert/oc-lettings-13
       - heroku/install
       - run:
+          name: Destroy application if exists
+          command: heroku apps:destroy oc-lettings-13 --confirm oc-lettings-13 || true
+      - run:
+          name: Create oc-lettings-13 application
+          command: heroku apps:create oc-lettings-13 --region eu
+      - run:
           name: Set heroku git:remote
           command: heroku git:remote -a oc-lettings-13
       - heroku/push-docker-image:
